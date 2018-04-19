@@ -1,0 +1,28 @@
+﻿  Compiling CUDA source file kernel.cu...
+  
+  c:\Users\guyen\Documents\Visual Studio 2015\Projects\cuda-by-example-p32-dev-prop\cuda-by-example-p32-dev-prop>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env --cl-version 2015 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "c:\Users\guyen\Documents\Visual Studio 2015\Projects\cuda-by-example-p32-dev-prop\cuda-by-example-p32-dev-prop\kernel.cu" 
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(11): warning : variable "dev" was declared but never referenced
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(12): warning : variable "stat" was declared but never referenced
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(11): warning : variable "dev" was declared but never referenced
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(12): warning : variable "stat" was declared but never referenced
+  kernel.cu
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(24): warning C4474: 'printf' : too many arguments passed for format string
+  c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(24): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(30): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'std::size_t'
+  c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(30): note: consider using '%zx' in the format string
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(31): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'std::size_t'
+  c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(31): note: consider using '%zx' in the format string
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(32): warning C4474: 'printf' : too many arguments passed for format string
+  c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(32): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(33): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(33): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'int *'
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(34): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'int *'
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(34): warning C4313: 'printf': '%x' in format string conflicts with argument 1 of type 'int *'
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(11): warning C4101: 'dev': unreferenced local variable
+c:/Users/guyen/Documents/Visual Studio 2015/Projects/cuda-by-example-p32-dev-prop/cuda-by-example-p32-dev-prop/kernel.cu(12): warning C4101: 'stat': unreferenced local variable
+  cuda-by-example-p32-dev-prop.vcxproj -> c:\Users\guyen\Documents\Visual Studio 2015\Projects\cuda-by-example-p32-dev-prop\x64\Debug\cuda-by-example-p32-dev-prop.exe
+  cuda-by-example-p32-dev-prop.vcxproj -> c:\Users\guyen\Documents\Visual Studio 2015\Projects\cuda-by-example-p32-dev-prop\x64\Debug\cuda-by-example-p32-dev-prop.pdb (Full PDB)
+  copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\cudart*.dll" "c:\Users\guyen\Documents\Visual Studio 2015\Projects\cuda-by-example-p32-dev-prop\x64\Debug\"
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\cudart32_91.dll
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\cudart64_91.dll
+          2 file(s) copied.
