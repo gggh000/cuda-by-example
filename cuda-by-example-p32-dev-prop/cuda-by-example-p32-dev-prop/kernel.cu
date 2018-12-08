@@ -17,9 +17,10 @@ int main()
 
 	for (i = 0; i < count; i++) {
 		cudaGetDeviceProperties(&prop, i);
-		printf(" --- General information for device %d ---", i);
+		printf("\n--- General information for device %d ---", i);
 		printf("\nName: %s.", prop.name);
 		printf("\nCompute capability: %d.%d", prop.major, prop.minor);
+		printf("\nCompute mode: 0x%x", prop.computeMode);
 		printf("\nClock rate: %d", prop.clockRate);
 		printf("\nDevice copy overlap: ", prop.deviceOverlap);
 		printf("\nKernel execution timeout: %d", prop.kernelExecTimeoutEnabled);
@@ -29,6 +30,10 @@ int main()
 		printf("\nPCI Bus Device Domain: %d %d %d", prop.pciBusID, prop.pciDeviceID, prop.pciDomainID);
 		printf("\nTotal global memory: 0x%x", prop.totalGlobalMem);
 		printf("\nTotal const memory: 0x%x", prop.totalConstMem);
+		printf("\nTotal shared memory/block: 0x%x", prop.sharedMemPerBlock);
+		printf("\nTotal shared memory/multiprocessor: 0x%x", prop.sharedMemPerMultiprocessor);
+		printf("\nMemory bus width: %d", prop.memoryBusWidth);
+		
 		printf("\nintegated: ", prop.integrated);
 		printf("\nmaxGridSize: 0%d", prop.maxGridSize);
 		printf("\nmaxThreadsDim: 0x%x", prop.maxThreadsDim);
