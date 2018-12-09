@@ -4,16 +4,19 @@
 
 #include <stdio.h>
 #define N 10
-#define CONFIG_ENABLE_PINNED_MAPPED_MEMO 0
+#define CONFIG_ENABLE_PINNED_MAPPED_MEMO 1
 
 __global__ void add(int *a, int *b, int *c)
 {
 	int tid = threadIdx.x;								// current thread's x dimension.
-	printf("\nadd(): tid: %d. 0x%08x, 0x%08x, 0x%08x %d, %d, %d.", tid, a, b, c, *a, *b, *c);
+	printf("\nadd(): tid: %d. 0x%08x, 0x%08x, 0x%08x %d, %d, %d.", tid, &a[tid], &b[tid], &c[tid], a[tid], b[tid], c[tid]);
 	if (tid < N) {
-		a[tid] += 100;
+		//a[tid] += 100;
 		c[tid] = a[tid] + b[tid];						// add as long as it is smaller than input vector.,	
 		//c[tid] = (int)&c[tid];
+#if CONFIG_ENABLE_PINNED_MAPPED_MEMO == 1
+		__syncthreads();
+#endif
 	}
 }
 
@@ -96,7 +99,7 @@ int main()
 		cudaMemcpy(c, dev_c, N * sizeof(int), cudaMemcpyDeviceToHost);
 	}
 
-	printf("\nResult before:");
+	printf("\nResult after:");
 	for (int i = 0; i < N; i++) {
 		if (CONFIG_ENABLE_PINNED_MAPPED_MEMO == 1) {
 			printf("\n%d + %d = %d", dev_a[i], dev_b[i], dev_c[i]);
