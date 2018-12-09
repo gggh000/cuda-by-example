@@ -19,6 +19,7 @@ int main()
 		cudaGetDeviceProperties(&prop, i);
 		printf("\n--- General information for device %d ---", i);
 		printf("\nName: %s.", prop.name);
+		printf("\nunifiedAddressing: %d.", prop.unifiedAddressing);
 		printf("\nCompute capability: %d.%d", prop.major, prop.minor);
 		printf("\nCompute mode: 0x%x", prop.computeMode);
 		printf("\nClock rate: %d", prop.clockRate);

@@ -5,14 +5,14 @@
 #include <stdio.h>
 #define N 10
 
-cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
-
 __global__ void add(int *a, int *b, int *c)
 {
 	int tid = threadIdx.x;								// current thread's x dimension.
 
-	if (tid < N)
+	if (tid < N) {
 		c[tid] = a[tid] + b[tid];						// add as long as it is smaller than input vector.,	
+		//c[tid] = (int)&c[tid];
+	}
 }
 
 int main()
@@ -32,23 +32,17 @@ int main()
 	stat[1] = cudaHostAlloc((void**)&b, N * sizeof(int), cudaHostAllocMapped);
 	stat[2] = cudaHostAlloc((void**)&c, N * sizeof(int), cudaHostAllocMapped);
 
-	printf("\n1. stat: %d", stat[0]);
-	printf("\n1. stat: %d", stat[1]);
-	printf("\n1. stat: %d", stat[2]);
+	for (int i = 0; i < 3; i++)
+		printf("\n%d. stat: %d", i, stat[i]);
 
-	//checkCudaErrors(cudaHostGetDevicePointer((void **)&dev_a, (void*)a, 0));
-	//checkCudaErrors(cudaHostGetDevicePointer((void **)&dev_b, (void*)b, 0));
-	//checkCudaErrors(cudaHostGetDevicePointer((void **)&dev_c, (void*)c, 0));
-	
 	printf("\ndev_a:c: 0x%08x, 0x%08x, 0x%08x", dev_a, dev_b, dev_c);
 	stat[0] = cudaHostGetDevicePointer((void **)&dev_a, (void*)a, 0);
 	stat[1] = cudaHostGetDevicePointer((void **)&dev_b, (void*)b, 0);
 	stat[2] = cudaHostGetDevicePointer((void **)&dev_c, (void*)c, 0);
 	printf("\ndev_a:c: 0x%08x, 0x%08x, 0x%08x", dev_a, dev_b, dev_c);
 
-	printf("\n2. stat: %d", stat[0]);
-	printf("\n2. stat: %d", stat[1]);
-	printf("\n2. stat: %d", stat[2]);
+	for (int i = 0; i < 3; i ++)
+		printf("\n%d. stat: %d", i, stat[i]);
 
 	printf("\n0x%08x", a);
 	printf("\n0x%08x", dev_a);
@@ -58,6 +52,7 @@ int main()
 	for (int i = 0; i < N; i++) {
 		dev_a[i] = i;
 		dev_b[i] = i*i;
+		dev_c[i] = -1;
 	}
 	
 	// Copy the summing vectors to device. 
@@ -73,13 +68,14 @@ int main()
 
 	// Print the vector now.
 
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < N; i++) {
 		printf("\n%d + %d = %d", dev_a[i], dev_b[i], dev_c[i]);
-
+		//printf("\n%d + %d = %d", a[i], b[i], c[i]);
+	}
 	// Release device memory. 
-	cudaFree(dev_a);
-	cudaFree(dev_b);
-	cudaFree(dev_c);
+	cudaFreeHost(dev_a);
+	cudaFreeHost(dev_b);
+	cudaFreeHost(dev_c);
 
 	getchar();
 	return 0;
