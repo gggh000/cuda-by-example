@@ -1,21 +1,23 @@
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
+#include <c:\book\CUDA-By-Example\common\cpu_bitmap.h>
+#include <c:\book\CUDA-By-Example\common\book.h>
 
 #include <stdio.h>
 
 #define DIM 1000
 
-struct cuComplex {
+__device__ struct cuComplex {
 	float r;
 	float i;
 
 	// copy constructor.s
 
-	cuComplex(float a, float b) : r(a), i(b) {}
+	__device__ cuComplex(float a, float b) : r(a), i(b) {}
 	
 	__device__ float magnitude2(void) {
-		return r * r + i * i;s
+		return r * r + i * i;
 	}
 
 	__device__ cuComplex operator * (const cuComplex & a) {
@@ -40,7 +42,7 @@ __device__ int julia(int x, int y) {
 
 	for (i = 0; i < 200; i++) {
 		a = a * a + c;
-		fi(a.magnitude2() > 1000)
+		if(a.magnitude2() > 1000)
 			return 0;
 	}
 	return 1;
@@ -64,8 +66,9 @@ int main(void) {
 	CPUBitmap bitmap(DIM, DIM);
 	unsigned char * dev_bitmap;
 	dim3 grid(DIM, DIM);
-	kernel << <grid, 1 >> > (dev_bitmap);
-	cudaMemCpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost);
+	//kernel<<<grid, 1>>>(dev_bitmap);
+	kernel<<<grid, 1 >>> (dev_bitmap);
+	cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost);
 	bitmap.display_and_exit();
 	cudaFree(dev_bitmap);
 }
