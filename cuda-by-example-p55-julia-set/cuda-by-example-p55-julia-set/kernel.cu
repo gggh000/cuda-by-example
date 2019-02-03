@@ -49,7 +49,7 @@ __device__ int julia(int x, int y) {
 	return 1;
 }
 
-__global__ void drawJulia(unsigned char * ptr) {
+__global__ void kernel(unsigned char * ptr) {
 	int x = blockIdx.x;
 	int y = blockIdx.y;
 	int offset = x + y * gridDim.x;
@@ -66,8 +66,9 @@ __global__ void drawJulia(unsigned char * ptr) {
 int main(void) {
 	CPUBitmap bitmap(DIM, DIM);
 	unsigned char * dev_bitmap;
+	cudaMalloc((void**)&dev_bitmap, bitmap.image_size());
 	dim3 grid(DIM, DIM);
-	drawJulia<<<grid, 1 >>> (dev_bitmap);
+	kernel<<<grid, 1 >>> (dev_bitmap);
 	cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost);
 	bitmap.display_and_exit();
 	cudaFree(dev_bitmap);

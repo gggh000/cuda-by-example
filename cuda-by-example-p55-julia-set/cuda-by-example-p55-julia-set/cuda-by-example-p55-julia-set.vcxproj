@@ -60,10 +60,11 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
-      <Include>c:\book\cuda-by-example\common;%(Include)</Include>
+      <Include>C:\git.co\CUDA-by-Example-source-code-for-the-book-s-examples-\common;%(Include)</Include>
     </CudaCompile>
     <CudaLink>
       <AdditionalLibraryDirectories>C:\book\CUDA-By-Example\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glut64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </CudaLink>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

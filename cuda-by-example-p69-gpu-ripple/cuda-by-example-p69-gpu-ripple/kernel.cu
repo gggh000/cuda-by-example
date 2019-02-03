@@ -1,8 +1,9 @@
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
-#include "cpu_anim.h"
+#include <c:\book\cuda-by-example\common\cpu_anim.h>
 #include <stdio.h>
+#define DIM 250
 
 struct DataBlock {
 	unsigned char * dev_bitmap;
