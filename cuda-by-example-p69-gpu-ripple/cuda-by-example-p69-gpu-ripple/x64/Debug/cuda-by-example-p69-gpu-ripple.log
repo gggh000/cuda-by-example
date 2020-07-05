@@ -2,17 +2,17 @@
   
   C:\git.co\cuda-by-example\cuda-by-example-p69-gpu-ripple\cuda-by-example-p69-gpu-ripple>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env --cl-version 2015 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64" -x cu  -I"C:\book\cuda-by-example\common" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\git.co\cuda-by-example\cuda-by-example-p69-gpu-ripple\cuda-by-example-p69-gpu-ripple\kernel.cu" 
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(127): warning C4005: 'CALLBACK': macro redefinition
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(35): warning C4010: single-line comment contains line-continuation character
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(36): warning C4010: single-line comment contains line-continuation character
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(37): warning C4010: single-line comment contains line-continuation character
 c:\book\cuda-by-example\common\cpu_anim.h(61): warning : conversion from a string literal to "char *" is deprecated
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(34): error : expression must have pointer-to-class type
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(35): error : argument of type "unsigned char *" is incompatible with parameter of type "int"
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(36): error : too many arguments in function call
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(38): error : expected a ";"
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : expected an expression
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : expression preceding parentheses of apparent call must have (pointer-to-) function type
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : type name is not allowed
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : expected an expression
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : type name is not allowed
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : too few arguments in function call
-C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(49): error : expected a ")"
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(45): warning : variable "data" was declared but never referenced
+C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(127): warning C4005: 'CALLBACK': macro redefinition
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(35): warning C4010: single-line comment contains line-continuation character
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(36): warning C4010: single-line comment contains line-continuation character
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(37): warning C4010: single-line comment contains line-continuation character
+c:\book\cuda-by-example\common\cpu_anim.h(61): warning : conversion from a string literal to "char *" is deprecated
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(45): warning : variable "data" was declared but never referenced
   kernel.cu
-C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\BuildCustomizations\CUDA 9.1.targets(707,9): error MSB3721: The command ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env --cl-version 2015 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64" -x cu  -I"C:\book\cuda-by-example\common" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\git.co\cuda-by-example\cuda-by-example-p69-gpu-ripple\cuda-by-example-p69-gpu-ripple\kernel.cu"" exited with code 1.
+C:/git.co/cuda-by-example/cuda-by-example-p69-gpu-ripple/cuda-by-example-p69-gpu-ripple/kernel.cu(45): warning C4101: 'data': unreferenced local variable
+LINK : fatal error LNK1104: cannot open file 'glut64.lib'

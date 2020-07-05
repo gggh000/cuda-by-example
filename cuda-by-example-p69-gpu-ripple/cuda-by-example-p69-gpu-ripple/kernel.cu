@@ -1,8 +1,8 @@
-
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include <c:\book\cuda-by-example\common\cpu_anim.h>
 #include <stdio.h>
+#include <math.h>
 #define DIM 250
 
 struct DataBlock {
@@ -31,7 +31,7 @@ __global__ void kernel(unsigned char * ptr, int ticks) {
 void generate_frame(DataBlock * d, int ticks) {
 	dim3 blocks(DIM / 16, DIM / 16);
 	dim3 threads(16, 16);
-	kernel<<<blocks, threads>>>(d->dev_bitmap->get_ptr(), \
+	//kernel<<<blocks, threads>>>(d->dev_bitmap->get_ptr(), \
 		d->dev_bitmap, \
 		d->bitmap->image_size(), \
 		cudaMemcpyDeviceToHost)
@@ -43,10 +43,10 @@ void cleanup(DataBlock * d) {
 
 int main (void) {
 	DataBlock data;
-	CPUAnimBitmap bitmap(DIM, DIM, &data);
-	data.bitmap = &bitmap;
-	cudaMalloc((void**)&data.dev_bitmap, bitmap.image_size());
-	bitmap.anim_and_exit(void(*) (void *, int)generate_frame, (void(*) (void*))cleanup);
+	//CPUAnimBitmap bitmap(DIM, DIM, &data);
+	//data.bitmap = &bitmap;
+	//cudaMalloc((void**)&data.dev_bitmap, bitmap.image_size());
+	//bitmap.anim_and_exit(void(*) (void *, int)generate_frame, (void(*) (void*))cleanup);
 
 	getchar();
 	return 0;

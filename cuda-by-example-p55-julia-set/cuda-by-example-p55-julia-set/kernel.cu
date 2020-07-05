@@ -56,9 +56,9 @@ __global__ void kernel(unsigned char * ptr) {
 	// Now calculate the value at the position.
 
 	int juliaValue = julia(x, y);
-	ptr[offset * 4 + 0] = 255 * juliaValue;
+	ptr[offset * 4 + 0] = 0;
 	ptr[offset * 4 + 1] = 0;
-	ptr[offset * 4 + 2] = 0;
+	ptr[offset * 4 + 2] = 255 * juliaValue;
 	ptr[offset * 4 + 3] = 255;
 }
 
