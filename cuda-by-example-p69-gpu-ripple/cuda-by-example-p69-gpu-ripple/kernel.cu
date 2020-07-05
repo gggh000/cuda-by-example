@@ -1,19 +1,18 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
+#include <c:\book\cuda-by-example\common\book.h>
 #include <c:\book\cuda-by-example\common\cpu_anim.h>
 #include <stdio.h>
 #include <math.h>
-#define DIM 250
 
-struct DataBlock {
-	unsigned char * dev_bitmap;
-	CPUAnimBitmap * bitmap;
-};
+#define DIM 250
+#define PI 3.1415926535897932f
+
 
 __global__ void kernel(unsigned char * ptr, int ticks) {
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	int y = threadIdx.y + blockIdx.y * blockDim.y;
-	int offset = x + y * blockDim.x + gridDim.x;
+	int offset = x + y * blockDim.x * gridDim.x;
 	
 	float fx = x - DIM / 2;
 	float fy = y - DIM / 2;
@@ -28,13 +27,20 @@ __global__ void kernel(unsigned char * ptr, int ticks) {
 
 }
 
+struct DataBlock {
+	unsigned char * dev_bitmap;
+	CPUAnimBitmap * bitmap;
+};
 void generate_frame(DataBlock * d, int ticks) {
 	dim3 blocks(DIM / 16, DIM / 16);
 	dim3 threads(16, 16);
-	//kernel<<<blocks, threads>>>(d->dev_bitmap->get_ptr(), \
-		d->dev_bitmap, \
-		d->bitmap->image_size(), \
-		cudaMemcpyDeviceToHost)
+	//kernel<<<blocks, threads>>>(d->dev_bitmap, ticks); 
+	cudaMemcpy(d->bitmap->get_ptr(), 
+		d->dev_bitmap, 
+		
+		d->bitmap->image_size(), 
+		cudaMemcpyDeviceToHost);
+	
 }
 
 void cleanup(DataBlock * d) {
@@ -46,8 +52,8 @@ int main (void) {
 	//CPUAnimBitmap bitmap(DIM, DIM, &data);
 	//data.bitmap = &bitmap;
 	//cudaMalloc((void**)&data.dev_bitmap, bitmap.image_size());
-	//bitmap.anim_and_exit(void(*) (void *, int)generate_frame, (void(*) (void*))cleanup);
-
+    bitmap.anim_and_exit( (void (*)(void*,int))generate_frame,
+                            (void (*)(void*))cleanup );
 	getchar();
 	return 0;
 }
