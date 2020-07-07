@@ -4,44 +4,36 @@
 
 #include <stdio.h>
 
-__global__ void kernel(int * dev_a, int * pMemAddr)
+__global__ void kerneladd(int  *dev_c)
 {
-    *dev_a = 1000;
-    *pMemAddr = 1001;
+    *dev_c = 1000;
+//    *pMemAddr = 1001;
 }
 
 int main()
 {
-	int * dev_a;
-	int * a;
+	int * dev_c;
+	int a = 300;
 	int memAddr = 0;
 	int stat;
-
-	stat = cudaMalloc(&dev_a, sizeof(int));
-	a = (int*)malloc(sizeof(int));
-
-	if (a != NULL) {
-		*a = 200;
-	} else {
-		printf("Failure allocating for a...\n");
-		return 1;
-	}
-	printf("Size of int: %d.\n", sizeof(int));
 	
-	printf("a before kernel call: %u.\n", *a);
+	printf("Size of int: %d.\n", sizeof(int));
+	printf("a before kernel call: %u.\n", a);
 	printf("1. cudaMalloc example, default parameters.\n");
-	printf("dev_a host address before: 0x%08x\n", dev_a);
-	cudaMalloc((void**)&dev_a, sizeof(int));
-	printf("dev_a host address after: 0x%08x\n", dev_a);
+	//printf("dev_c host address before cudaMalloc: 0x%08x\n", dev_c);
 
-	cudaMemcpy(dev_a, a, sizeof(int), cudaMemcpyHostToDevice);
-	kernel <<<1, 1>>>  (dev_a, &memAddr);
-	cudaMemcpy(&a, dev_a, sizeof(int), cudaMemcpyDeviceToHost);
+	cudaMalloc((void**)&dev_c, sizeof(int));
 
-	printf("a after kernel call: %u.\n", *a);
+	//printf("dev_c host address after cudaMalloc: 0x%08x\n", dev_c);
+
+	cudaMemcpy(dev_c, &a, sizeof(int), cudaMemcpyHostToDevice);
+	kerneladd <<<1, 1>>>  (dev_c);
+	cudaMemcpy(&a, dev_c, sizeof(int), cudaMemcpyDeviceToHost);
+
+	printf("a after kernel call: %u.\n", a);
 	//printf("memAddr %08x", memAddr);
 
-	cudaFree(dev_a);
+	cudaFree(dev_c);
 	getchar();
 	return 0;
 }
