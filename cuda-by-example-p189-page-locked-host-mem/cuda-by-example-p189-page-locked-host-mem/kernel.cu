@@ -21,7 +21,7 @@ float cuda_malloc_test(int size, bool up) {
 		if (up)
 			cudaMemcpy(dev_a, a, size * sizeof(*dev_a), cudaMemcpyHostToDevice);
 		else
-			cudaMemcpy(dev_a, a, size * sizeof(*dev_a), cudaMemcpyDeviceToHost);
+			cudaMemcpy(a, dev_a, size * sizeof(*dev_a), cudaMemcpyDeviceToHost);
 	}
 	cudaEventRecord(stop, 0);
 	cudaEventSynchronize(stop);
@@ -39,6 +39,10 @@ int main()
 	float elapsedTime;
 	float MB = (float)100 * SIZE * sizeof(int) / 1024 / 1024;
 	elapsedTime = cuda_malloc_test(SIZE, true);
-	printf("Time using cudaMalloc: %3.1f ms.\n", elapsedTime);
+	printf("Time using cudaMalloc(up): %3.1f ms.\n", elapsedTime);
+	printf("MB/s during copy up: %3.1f.\n", MB / (elapsedTime / 1000));
+
+	elapsedTime = cuda_malloc_test(SIZE, false);
+	printf("Time using cudaMalloc(down): %3.1f ms.\n", elapsedTime);
 	printf("MB/s during copy up: %3.1f.\n", MB / (elapsedTime / 1000));
 }
