@@ -46,7 +46,7 @@ struct Sphere {
 };
 
 //Sphere * s;
-//__constant__ Sphere s[SPHERES];
+__constant__ Sphere s[SPHERES];
 
 __global__ void kernel(Sphere *s, unsigned char * ptr) {
 	// map from threadIdx/blockIdx to pixel positions.
@@ -87,7 +87,6 @@ int main()
 	cudaEventCreate(&stop);
 	cudaEventRecord(&start, 0);
 	*/
-	Sphere * s;
 
 	CPUBitmap bitmap(DIM, DIM);
 	unsigned char *dev_bitmap;
@@ -98,12 +97,13 @@ int main()
 
 	// alloc memory for sphere dataset.
 
-	cudaMalloc((void**)&s, (size_t)sizeof(Sphere) * SPHERES);
+	//cudaMalloc((void**)&s, (size_t)sizeof(Sphere) * SPHERES);
 
 	// alloc temp memory, initialize it, copy to memory on the GPU,
 	// and then free our temp memory.
-
+	
 	Sphere * temp_s = (Sphere *)malloc(sizeof(Sphere) * SPHERES);
+
 	for (int i = 0; i < SPHERES; i++) {
 		temp_s[i].r = rnd(1.0f);
 		temp_s[i].g = rnd(1.0f);
@@ -114,7 +114,8 @@ int main()
 		temp_s[i].radius = rnd(100.0f) + 20;
 	}
 
-	cudaMemcpy(s, temp_s, sizeof(Sphere) * SPHERES, cudaMemcpyHostToDevice);
+	//cudaMemcpy(s, temp_s, sizeof(Sphere) * SPHERES, cudaMemcpyHostToDevice);
+	cudaMemcpyToSymbol(s, temp_s, sizeof(Sphere) * SPHERES);
 	free(temp_s);
 
 	// generate bitmap from our sphere sets
