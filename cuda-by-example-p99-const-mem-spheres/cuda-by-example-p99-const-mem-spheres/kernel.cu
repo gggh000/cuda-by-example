@@ -77,6 +77,10 @@ __global__ void kernel(Sphere *s, unsigned char * ptr) {
 
 }
 
+// globals needed by the update routine
+struct DataBlock {
+    unsigned char   *dev_bitmap;
+};
 
 int main()
 {
@@ -87,13 +91,15 @@ int main()
 	cudaEventCreate(&stop);
 	cudaEventRecord(&start, 0);
 	*/
+	DataBlock   data;
 
-	CPUBitmap bitmap(DIM, DIM);
+	CPUBitmap bitmap(DIM, DIM, &data);
 	unsigned char *dev_bitmap;
 
 	// alloc memory on the GPU for output bitmap.
 
-	cudaMalloc((void**)&dev_bitmap, bitmap.image_size());
+	cudaMalloc((void**)&dev_bitmap, 
+			bitmap.image_size());
 
 	// alloc memory for sphere dataset.
 
@@ -115,7 +121,8 @@ int main()
 	}
 
 	//cudaMemcpy(s, temp_s, sizeof(Sphere) * SPHERES, cudaMemcpyHostToDevice);
-	cudaMemcpyToSymbol(s, temp_s, sizeof(Sphere) * SPHERES);
+	cudaMemcpyToSymbol(s, temp_s, 
+				sizeof(Sphere) * SPHERES);
 	free(temp_s);
 
 	// generate bitmap from our sphere sets
@@ -123,9 +130,11 @@ int main()
 	dim3 grids(DIM / 16, DIM / 16);
 	dim3 threads(16, 16);
 	kernel << <grids, threads >> > (s, dev_bitmap);
+	
+	//
+	
 	cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost);
-	bitmap.display_and_exit();
 	cudaFree(dev_bitmap);
-	cudaFree(s);
+	bitmap.display_and_exit();
 }
 
